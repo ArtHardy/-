@@ -1,4 +1,6 @@
 ﻿using CalcConsole;
+using CalcDB.Models;
+using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +39,23 @@ namespace DesktopCalc
             var result = Calc.Exec(oper, tbInput.Text.Trim().Split(' '));
 
             label1.Text = result.ToString();
+
+            #region Сохранение в БД
+
+            var or = new OperationResult()
+            {
+                OperationId = lbOperations.SelectedIndex,
+                Result = result,
+                ExecutionTime = new Random().Next(100, 4000),
+                Error = "",
+                Args = tbInput.Text.Trim()
+            };
+            
+            var operResultRepository = new OperResultRepository();
+            operResultRepository.Save(or);
+
+            #endregion
+
         }
 
         private void lbOperations_SelectedIndexChanged(object sender, EventArgs e)
