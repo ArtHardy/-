@@ -22,14 +22,5 @@ namespace CalcDB.Models
         public DateTime CreationDate { get; set; }
 
         public string Error { get; set; }
-
-        #region IEntity
-
-        string IEntity.TableName => "[dbo].[OperationResult]";
-
-        public static string TableName => "[dbo].[OperationResult]";
-
-        #endregion
-
     }
 }

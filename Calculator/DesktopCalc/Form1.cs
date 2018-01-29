@@ -53,6 +53,7 @@ namespace DesktopCalc
             };
             
             var operResultRepository = new BaseRepository<OperationResult>();
+            var all = operResultRepository.GetAll();
             operResultRepository.Save(or);
 
             #endregion
