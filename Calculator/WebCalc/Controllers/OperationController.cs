@@ -1,6 +1,8 @@
 ﻿using CalcDB.Models;
 using CalcDB.Repositories;
 using System.Web.Mvc;
+using System.Linq;
+using WebCalc.Models;
 
 namespace WebCalc.Controllers
 {
@@ -10,7 +12,15 @@ namespace WebCalc.Controllers
         public ActionResult Index()
         {
             var operationRepository = new BaseRepository<Operation>();
-            return View(operationRepository.GetAll());
+            var dbOperations = operationRepository.GetAll();
+            var operations = dbOperations.Select(o => new OperationViewModel()
+            {
+                Id = o.Id,
+                Name = o.Name,
+                OwnerId = o.OwnerId
+            });
+
+            return View(operations);
         }
     }
 }

@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalcController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
@@ -127,6 +128,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalcModel.cs" />
+    <Compile Include="Models\OperationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,10 +173,13 @@
     <Content Include="Views\My\FIO.cshtml" />
     <Content Include="Views\Operation\Row.cshtml" />
     <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Calc\Index.cshtml" />
+    <Content Include="Views\Calc\Result.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Operations.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\OperationViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -186,6 +192,10 @@
     <ProjectReference Include="..\CalcDB\CalcDB.csproj">
       <Project>{6f5db30a-d3bb-4394-b128-82347cbe3162}</Project>
       <Name>CalcDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalcLibrary\CalcLibrary.csproj">
+      <Project>{b5427f31-a276-44d3-ad5b-682c4e0dafe6}</Project>
+      <Name>CalcLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
