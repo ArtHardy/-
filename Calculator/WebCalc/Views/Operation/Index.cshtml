@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CalcDB.Models.Operation>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Операция</th>
+            <th scope="col">Разработчик</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var oper in Model)
+        {
+            @Html.Partial("Row", oper)
+        }
+    </tbody>
+</table>

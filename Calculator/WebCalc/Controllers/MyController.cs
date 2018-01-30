@@ -9,9 +9,9 @@ namespace WebCalc.Controllers
     public class MyController : Controller
     {
         [HttpGet]
-        public ActionResult Index(long id)
+        public ActionResult Index(long? id)
         {
-            ViewData.Model = id.ToString();
+            ViewData.Model = $"{id}";
 
             ViewData["age"] = 30;
             ViewData.Add("isAdmin", false);

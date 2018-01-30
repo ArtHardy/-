@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Extensions\MyHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +168,8 @@
     <Content Include="Views\My\Index.cshtml" />
     <Content Include="Views\My\Name.cshtml" />
     <Content Include="Views\My\FIO.cshtml" />
+    <Content Include="Views\Operation\Row.cshtml" />
+    <Content Include="Views\Operation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -178,6 +181,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CalcDB\CalcDB.csproj">
+      <Project>{6f5db30a-d3bb-4394-b128-82347cbe3162}</Project>
+      <Name>CalcDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,25 +14,30 @@
     <title>Name</title>
 </head>
 <body>
-    <div>
-        <h1>Меня зовут @Html.Partial("FIO", fio)! </h1>
-        @{ 
-            Html.RenderPartial("FIO", fio);
-        }
-    </div>
-    <hr />
-    @Html.ListerFlat(страны)    
-
-    <hr />
-    @MyHelpers.Lister(ViewBag.Cities)
-
-
-    @using (Html.BeginForm())
+    @if (!string.IsNullOrWhiteSpace(Model))
     {
-        @Html.TextBox("firstname", Model)
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Показать то, что скрыто
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <h1>Меня зовут @Html.Partial("FIO", fio)! </h1>
+                <hr />
+                @Html.ListerFlat(страны)
+                <hr />
+                @MyHelpers.Lister(ViewBag.Cities)
 
-        <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+        <hr />
     }
+    @using (Html.BeginForm("Index", "My", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="input-group mb-2 mr-sm-2">
+            @Html.TextBox("firstname", Model, new { @class = "form-control", placeholder = "Ваше имя" })
+        </div>
 
+        @Html.Submit("Сохранить")
+    }
 </body>
 </html>
