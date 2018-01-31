@@ -10,6 +10,7 @@ using WebCalc.Models;
 
 namespace WebCalc.Controllers
 {
+    [Authorize]
     public class CalcController : Controller
     {
 
@@ -44,6 +45,10 @@ namespace WebCalc.Controllers
         [HttpPost]
         public ActionResult Exec(string operation, string args)
         {
+            if (string.IsNullOrWhiteSpace(args))
+            {
+                return Content("Укажите входные данные");
+            }
 
             var result = Calc.Exec(operation, args.Split(new[] { ' ', ',' }));
 
@@ -64,11 +69,12 @@ namespace WebCalc.Controllers
 
             #endregion
 
-            return PartialView("Result", result);
+            return PartialView("Result", or);
         }
 
         public ActionResult History()
         {
+            
             return View(OperationResultRepository.GetAll());
         }
     }
