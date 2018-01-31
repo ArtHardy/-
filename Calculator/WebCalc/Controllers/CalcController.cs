@@ -1,4 +1,6 @@
 ﻿using CalcConsole;
+using CalcDB.Models;
+using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,30 @@ namespace WebCalc.Controllers
 {
     public class CalcController : Controller
     {
+
+        #region Protected Members
+
+        protected IOperationRepository OperationRepository { get; set; }
+
+        protected IOperResultRepository OperationResultRepository { get; set; }
+
+        protected Calc Calc { get; set; }
+
+        #endregion
+
+        public CalcController()
+        {
+            OperationRepository = new OperationRepository();
+            OperationResultRepository = new OperResultRepository();
+            Calc = new Calc();
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
-            var calc = new Calc();
-
             var model = new CalcModel()
             {
-                Operations = calc.GetOperationNames()
+                Operations = Calc.GetOperationNames()
             };
 
             return View(model);
@@ -26,27 +44,32 @@ namespace WebCalc.Controllers
         [HttpPost]
         public ActionResult Exec(string operation, string args)
         {
-            var calc = new Calc();
 
-            var result = calc.Exec(operation, args.Split(new[] { ' ', ',' }));
+            var result = Calc.Exec(operation, args.Split(new[] { ' ', ',' }));
 
-            var model = new CalcModel()
+            #region Сохранение в БД
+            var oper = OperationRepository.GetOrCreate(operation);
+
+            var or = new OperationResult()
             {
-                Operations = calc.GetOperationNames(),
-                Result = result
+                OperationId = oper.Id,
+                Result = result,
+                ExecutionTime = new Random().Next(100, 4000),
+                Error = "",
+                Args = args.Trim(),
+                CreationDate = DateTime.Now
             };
 
-            return View("Index", model);
-        }
+            OperationResultRepository.Save(or);
 
-        [HttpPost]
-        public ActionResult ExecAjax(string operation, string args)
-        {
-            var calc = new Calc();
-
-            var result = calc.Exec(operation, args.Split(new[] { ' ', ',' }));
+            #endregion
 
             return PartialView("Result", result);
+        }
+
+        public ActionResult History()
+        {
+            return View(OperationResultRepository.GetAll());
         }
     }
 }

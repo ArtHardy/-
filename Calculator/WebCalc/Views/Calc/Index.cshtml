@@ -26,7 +26,7 @@
     function CalcAjax() {
 
         $.ajax({
-            url: "@(Url.Action("ExecAjax", "Calc"))",
+            url: "@(Url.Action("Exec", "Calc"))",
             method: "POST",
             data: $("form").serialize()
         })
