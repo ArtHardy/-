@@ -6,5 +6,7 @@ namespace CalcDB.Repositories
     public interface IOperResultRepository : IRepository<OperationResult>
     {
         IEnumerable<OperationResult> GetByOperation(long Id);
+
+        IEnumerable<OperationResult> GetByUsername(string username);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CalcDB.Models;
 
 namespace CalcDB.Repositories
@@ -9,16 +8,20 @@ namespace CalcDB.Repositories
         public bool Check(string loginOrEmail, string password)
         {
             var result = ExecQuery(
-                $"[Password] =N'{password}' AND " +
+                $"[Password] = N'{password}' AND " +
                 "[Status] in (1, 4)  AND " +
                 $"([Login] = N'{loginOrEmail}' OR [Email] = N'{loginOrEmail}') ");
 
             return result.Any();
         }
 
-        public User GetByLogin(string login)
+        public User GetByLogin(string loginOrEmail)
         {
-            throw new NotImplementedException();
+            var result = ExecQuery(
+                "[Status] in (1, 4)  AND " +
+                $"([Login] = N'{loginOrEmail}' OR [Email] = N'{loginOrEmail}') ");
+
+            return result.FirstOrDefault();
         }
     }
 }

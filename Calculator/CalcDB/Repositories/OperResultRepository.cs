@@ -9,5 +9,13 @@ namespace CalcDB.Repositories
         {
             return null;
         }
+
+        public IEnumerable<OperationResult> GetByUsername(string username)
+        {
+            return ExecQuery(" [AuthorId] in (SELECT [Id] from [dbo].[User] WHERE "+
+                "[Status] in (1, 4)  AND " +
+                $"([Login] = N'{username}' OR [Email] = N'{username}') "
+                + " )");
+        }
     }
 }

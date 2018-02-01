@@ -22,5 +22,7 @@ namespace CalcDB.Models
         public DateTime CreationDate { get; set; }
 
         public string Error { get; set; }
+
+        public long AuthorId { get; set; }
     }
 }

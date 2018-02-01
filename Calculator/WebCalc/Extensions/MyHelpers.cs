@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using CalcDB.Repositories;
+using System.Web.Mvc;
 
 namespace WebCalc.Extensions
 {
@@ -28,6 +29,14 @@ namespace WebCalc.Extensions
             }
 
             return MvcHtmlString.Create(button.ToString());
+        }
+
+        public static MvcHtmlString FIO(this HtmlHelper html)
+        {
+            var name = html.ViewContext.HttpContext.User.Identity.Name;
+            var rep = new UserRepository();
+            var user = rep.GetByLogin(name);
+            return MvcHtmlString.Create($"{user.FirstName} {user.LastName}");
         }
 
     }

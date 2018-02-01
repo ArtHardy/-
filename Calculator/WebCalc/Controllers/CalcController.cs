@@ -74,8 +74,7 @@ namespace WebCalc.Controllers
 
         public ActionResult History()
         {
-            
-            return View(OperationResultRepository.GetAll());
+            return View(OperationResultRepository.GetByUsername(User.Identity.Name));
         }
     }
 }
