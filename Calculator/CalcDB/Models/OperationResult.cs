@@ -6,23 +6,25 @@ namespace CalcDB.Models
 {
     public class OperationResult : IEntity
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public long OperationId { get; set; }
+        public virtual long OperationId { get; set; }
 
-        public string Args { get; set; }
+        public virtual string Args { get; set; }
 
-        public double? Result { get; set; }
+        public virtual double? Result { get; set; }
 
         /// <summary>
         /// Продолжительность выполнения расчета, мс
         /// </summary>
-        public long ExecutionTime { get; set; }
+        public virtual long ExecutionTime { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public virtual DateTime CreationDate { get; set; }
 
-        public string Error { get; set; }
+        public virtual string Error { get; set; }
 
-        public long AuthorId { get; set; }
+        public virtual long AuthorId { get; set; }
+
+        public virtual User Author { get; set; }
     }
 }

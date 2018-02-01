@@ -1,4 +1,4 @@
-﻿using CalcDB.Repositories;
+﻿using CalcDB.NHibernate.Repositories;
 using System.Web.Mvc;
 
 namespace WebCalc.Extensions
@@ -34,9 +34,9 @@ namespace WebCalc.Extensions
         public static MvcHtmlString FIO(this HtmlHelper html)
         {
             var name = html.ViewContext.HttpContext.User.Identity.Name;
-            var rep = new UserRepository();
+            var rep = new NHUserRepository();
             var user = rep.GetByLogin(name);
-            return MvcHtmlString.Create($"{user.FirstName} {user.LastName}");
+            return MvcHtmlString.Create($"😠 {user.FirstName} {user.LastName}");
         }
 
     }

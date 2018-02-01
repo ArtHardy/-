@@ -19,19 +19,19 @@ namespace CalcDB.Models
     {
         #region IEntity
 
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public virtual string LastName { get; set; }
 
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
-        public string Login { get; set; }
+        public virtual string Login { get; set; }
 
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
-        public UserStatus Status { get; set; }
+        public virtual UserStatus Status { get; set; }
 
         #endregion
     }

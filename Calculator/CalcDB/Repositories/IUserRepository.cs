@@ -2,7 +2,7 @@
 
 namespace CalcDB.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
         User GetByLogin(string login);
 

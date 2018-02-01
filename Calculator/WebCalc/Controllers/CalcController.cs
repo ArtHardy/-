@@ -1,5 +1,6 @@
 ﻿using CalcConsole;
 using CalcDB.Models;
+using CalcDB.NHibernate.Repositories;
 using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace WebCalc.Controllers
         public CalcController()
         {
             OperationRepository = new OperationRepository();
-            OperationResultRepository = new OperResultRepository();
+            OperationResultRepository = new NHOperResultRepository();
             Calc = new Calc();
         }
 
