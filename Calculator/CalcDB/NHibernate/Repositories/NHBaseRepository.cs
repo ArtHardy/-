@@ -51,7 +51,7 @@ namespace CalcDB.NHibernate.Repositories
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    session.Save(result);
+                    session.SaveOrUpdate(result);
                     transaction.Commit();
                 }
             }

@@ -12,8 +12,7 @@ namespace CalcDB.Repositories
             {
                 oper = new Operation()
                 {
-                    Name = name,
-                    OwnerId = 1
+                    Name = name
                 };
                 Save(oper);
             }

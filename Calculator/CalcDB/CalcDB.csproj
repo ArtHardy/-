@@ -67,9 +67,11 @@
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NHibernate\Helper.cs" />
     <Compile Include="NHibernate\Repositories\NHBaseRepository.cs" />
+    <Compile Include="NHibernate\Repositories\NHOperationRepository.cs" />
     <Compile Include="NHibernate\Repositories\NHOperResultRepository.cs" />
     <Compile Include="NHibernate\Repositories\NHUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +96,8 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="NHibernate\Mappings\Role.hbm.xml" />
+    <EmbeddedResource Include="NHibernate\Mappings\Operation.hbm.xml" />
     <EmbeddedResource Include="NHibernate\Mappings\OperationResult.hbm.xml" />
     <EmbeddedResource Include="NHibernate\Mappings\User.hbm.xml" />
   </ItemGroup>

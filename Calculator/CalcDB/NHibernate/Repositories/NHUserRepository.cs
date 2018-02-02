@@ -1,6 +1,7 @@
 ﻿using CalcDB.Repositories;
 using CalcDB.Models;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace CalcDB.NHibernate.Repositories
 {
@@ -33,6 +34,16 @@ namespace CalcDB.NHibernate.Repositories
                 return criteria.UniqueResult<User>();
             }
             // 😠
+        }
+
+        public static User AdminUser()
+        {
+            using (var session = Helper.OpenSession())
+            {
+                return session.QueryOver<User>()
+                    .And(u => u.Status == UserStatus.System)
+                    .SingleOrDefault();
+            }
         }
     }
 }

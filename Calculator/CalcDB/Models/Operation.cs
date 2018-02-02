@@ -1,13 +1,17 @@
 ﻿using CalcDB.Repositories;
+using System;
 
 namespace CalcDB.Models
 {
     public class Operation : IEntity
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
-        public long OwnerId { get; set; }
+        [Obsolete("Используйте свойство Owner", true)]
+        public virtual long OwnerId { get; set; }
+
+        public virtual User Owner { get; set; }
     }
 }

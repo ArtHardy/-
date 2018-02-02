@@ -1,6 +1,5 @@
 ﻿using CalcDB.Repositories;
 using System;
-using System.Globalization;
 
 namespace CalcDB.Models
 {
@@ -8,7 +7,10 @@ namespace CalcDB.Models
     {
         public virtual long Id { get; set; }
 
+        [Obsolete("", true)]
         public virtual long OperationId { get; set; }
+
+        public virtual Operation Operation { get; set; }
 
         public virtual string Args { get; set; }
 
@@ -23,6 +25,7 @@ namespace CalcDB.Models
 
         public virtual string Error { get; set; }
 
+        [Obsolete("", true)]
         public virtual long AuthorId { get; set; }
 
         public virtual User Author { get; set; }

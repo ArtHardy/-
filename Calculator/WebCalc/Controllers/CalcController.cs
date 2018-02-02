@@ -4,6 +4,7 @@ using CalcDB.NHibernate.Repositories;
 using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,14 +22,17 @@ namespace WebCalc.Controllers
 
         protected IOperResultRepository OperationResultRepository { get; set; }
 
+        protected IUserRepository UserRepository { get; set; }
+
         protected Calc Calc { get; set; }
 
         #endregion
 
         public CalcController()
         {
-            OperationRepository = new OperationRepository();
+            OperationRepository = new NHOperationRepository();
             OperationResultRepository = new NHOperResultRepository();
+            UserRepository = new NHUserRepository();
             Calc = new Calc();
         }
 
@@ -51,19 +55,26 @@ namespace WebCalc.Controllers
                 return Content("Укажите входные данные");
             }
 
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            
             var result = Calc.Exec(operation, args.Split(new[] { ' ', ',' }));
+
+            stopWatch.Stop();
 
             #region Сохранение в БД
             var oper = OperationRepository.GetOrCreate(operation);
+            var curUser = UserRepository.GetByLogin(User.Identity.Name);
 
             var or = new OperationResult()
             {
-                OperationId = oper.Id,
+                Operation = oper,
                 Result = result,
-                ExecutionTime = new Random().Next(100, 4000),
+                ExecutionTime = stopWatch.ElapsedMilliseconds,
                 Error = "",
                 Args = args.Trim(),
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                Author = curUser
             };
 
             OperationResultRepository.Save(or);
@@ -73,6 +84,7 @@ namespace WebCalc.Controllers
             return PartialView("Result", or);
         }
 
+        [Authorize(Roles = "admin,user")]
         public ActionResult History()
         {
             return View(OperationResultRepository.GetByUsername(User.Identity.Name));
